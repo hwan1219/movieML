@@ -43,11 +43,11 @@ def crawl_reviews():
       
       go_review_btn = driver.find_element(By.CSS_SELECTOR, '.sc_new .tab_list ._item:nth-of-type(5)')
       go_review_btn.click()
-      time.sleep(2)
+      time.sleep(1)
   
       review_box = driver.find_element(By.CSS_SELECTOR, '.lego_review_list')
       driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", review_box)
-      time.sleep(2)
+      time.sleep(1)
   
       title = driver.find_element(By.CSS_SELECTOR, '.sc_new .title_area .title .area_text_title ._text')
       score = driver.find_elements(By.CSS_SELECTOR, '.lego_review_list .area_card_outer .area_card .area_title_box .area_text_box')
@@ -56,7 +56,7 @@ def crawl_reviews():
       pos = driver.find_elements(By.CSS_SELECTOR, '.lego_review_list .area_card_outer .area_card .cm_sympathy_area ._btn_upvote ._count_num')
       neg = driver.find_elements(By.CSS_SELECTOR, '.lego_review_list .area_card_outer .area_card .cm_sympathy_area ._btn_downvote ._count_num')
   
-      for j in range(len(score)):
+      for j in range(len(text)):
         review_data = {
           'title': title.text,
           'score': score[j].text,
@@ -71,6 +71,6 @@ def crawl_reviews():
       driver.switch_to.window(main_window)
       
   collect_reviews_on_page()
-  
+
   driver.quit()
   return review_data_list
