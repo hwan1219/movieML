@@ -14,9 +14,7 @@ def preprocess_data(raw_data):
     else:
       return np.nan
   df['score'] = df['score'].apply(extract_score)
-  df['score'] = (
-    df.groupby('title')['score']
-    .transform(lambda x: x.fillna(round(x.mean(), 1))))
+  df = df.dropna(subset=['score'])
 
   df['text'] = (
     df['text']

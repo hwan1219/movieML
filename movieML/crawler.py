@@ -43,7 +43,7 @@ def crawl_reviews():
       
       go_review_btn = driver.find_element(By.CSS_SELECTOR, '.sc_new .tab_list ._item:nth-of-type(5)')
       go_review_btn.click()
-      time.sleep(1)
+      wait_for_elements('.lego_review_list', driver)
   
       review_box = driver.find_element(By.CSS_SELECTOR, '.lego_review_list')
       driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", review_box)
@@ -69,8 +69,25 @@ def crawl_reviews():
   
       driver.close()
       driver.switch_to.window(main_window)
-      
+  
   collect_reviews_on_page()
-
+  
+  # def next_page(page_num):
+  #   next_btn = driver.find_element(By.CSS_SELECTOR, '.sc_new .cm_paging_area .pgs .pg_next')
+  #   next_btn.click()
+  #   WebDriverWait(driver, 10).until(
+  #     EC.text_to_be_present_in_element(
+  #       (By.CSS_SELECTOR, '.sc_new .cm_paging_area .pgs .npgs ._current'),
+  #       str(page_num)
+  #     )
+  #   )
+  #   wait_for_elements('.sc_new .card_area .card_item .data_area .data_box .area_text_box ._text', driver)
+    
+  # for page in range(1, 6):
+  #   print(f"{page}페이지 리뷰 크롤링 시작")
+  #   collect_reviews_on_page()
+  #   if page < 5:
+  #     next_page(page+1)
+    
   driver.quit()
   return review_data_list
