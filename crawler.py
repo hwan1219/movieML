@@ -46,8 +46,9 @@ def crawl_reviews():
       wait_for_elements('.lego_review_list', driver)
   
       review_box = driver.find_element(By.CSS_SELECTOR, '.lego_review_list')
-      driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", review_box)
-      time.sleep(1)
+      for _ in range(5):
+        driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", review_box)
+        time.sleep(1)
   
       title = driver.find_element(By.CSS_SELECTOR, '.sc_new .title_area .title .area_text_title ._text')
       score = driver.find_elements(By.CSS_SELECTOR, '.lego_review_list .area_card_outer .area_card .area_title_box .area_text_box')
