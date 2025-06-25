@@ -44,7 +44,7 @@ def model_classification():
   
   x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42, stratify=y)
   
-  smote = SMOTE(random_state=42)
+  smote = SMOTE(random_state=42, k_neighbors=3)
   x_train_sm, y_train_sm = smote.fit_resample(x_train, y_train)
   
   nb_model = MultinomialNB()
@@ -65,7 +65,7 @@ def model_classification():
   print(f"LogisticRegression Accuracy: {accuracy_score(y_test, lr_pred)}")
   print(f"LogisticRegression report:\n{confusion_matrix(y_test, lr_pred)}")
   
-  print(f"RandomForest Accuracy: {accuracy_score(y_test, lr_pred)}")
-  print(f"RandomForest report:\n{confusion_matrix(y_test, lr_pred)}")
+  print(f"RandomForest Accuracy: {accuracy_score(y_test, rf_pred)}")
+  print(f"RandomForest report:\n{confusion_matrix(y_test, rf_pred)}")
 
 model_classification()
